@@ -96,6 +96,7 @@ public class Douban extends Spider {
                 classes.put(doudou);
                 classes.put(yangyang);
             }
+
             classes.put(dianying);
             classes.put(dianshiju);
             classes.put(jingdian);
