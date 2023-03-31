@@ -22,11 +22,13 @@ public class Douban extends Spider {
 
     private static final String siteUrl = "https://movie.douban.com";
 
+    public String ext = "";
     public HashMap<String, String> headers = new HashMap<>();
 
-    public void init(Context context) {
-        super.init(context);
+    public void init(Context context, String ext) {
+        super.init(context, ext);
         HashMap<String, String> h1 = new HashMap<>();
+        this.ext = ext;
         h1.put("User-Agent",
                 "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36");
         OkHttpUtil.get(OkHttpUtil.defaultClient(), "https://movie.douban.com", new OKCallBack<Response>() {
@@ -90,11 +92,13 @@ public class Douban extends Spider {
             // dongman.put("type_name", "动漫");
 
             // zongyi.put("type_name", "综艺");
-            classes.put(doudou);
-            classes.put(yangyang);
-            classes.put(jingdian);
+            if (ext.equals("99")) {
+                classes.put(doudou);
+                classes.put(yangyang);
+            }
             classes.put(dianying);
             classes.put(dianshiju);
+            classes.put(jingdian);
 
             result.put("class", classes);
             if (filter) {
