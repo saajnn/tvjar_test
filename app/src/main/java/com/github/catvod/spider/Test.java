@@ -62,6 +62,7 @@ public class Test extends Spider {
             test1.put("type_id", "1");
             test0.put("type_name", e);
 
+
         } catch (Exception e) {
             SpiderDebug.log(e);
         }
