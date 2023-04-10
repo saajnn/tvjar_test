@@ -60,7 +60,7 @@ public class Test extends Spider {
             test0.put("type_id", "0");
             test0.put("type_name", "测试1:" + d);
             test1.put("type_id", "1");
-            test0.put("type_name", "测试二:" + e);
+            test1.put("type_name", "测试二:" + e);
 
             classes.put(test0);
             classes.put(test1);
