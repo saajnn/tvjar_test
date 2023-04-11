@@ -78,6 +78,9 @@ public class Test extends Spider {
             test0.put("type_id", "0");
             classes.put(test0);
 
+
+
+
             result.put("class", classes);
             return result.toString();
         } catch (Exception e) {
