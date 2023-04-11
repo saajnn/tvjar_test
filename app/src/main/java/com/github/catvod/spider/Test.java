@@ -65,24 +65,23 @@ public class Test extends Spider {
             fakeDevice = fakeDid();
             String url = siteUrl + "/v2.user/tokenlogin";
             HashMap<String, String> m = getHeaders(url, "ANDROID cn.grelighting.xpg1.1.5");
-            for (String key : m.keySet()) {
-                System.out.println(key);
-                System.out.println(m.get(key));
+            // for (String key : m.keySet()) {
+            // System.out.println(key);
+            // System.out.println(m.get(key));
 
-            }
+            // }
 
             JSONObject result = new JSONObject();
             JSONArray classes = new JSONArray();
 
             JSONObject test0 = new JSONObject();
             test0.put("type_id", "0");
+            test0.put("type_name", "token:" + m.get("token"));
             classes.put(test0);
 
-
-
-
             result.put("class", classes);
-            return result.toString();
+            System.out.println(result.toString());
+            // return result.toString();
         } catch (Exception e) {
             SpiderDebug.log(e);
         }
