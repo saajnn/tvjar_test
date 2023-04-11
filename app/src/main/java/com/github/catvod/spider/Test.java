@@ -21,7 +21,6 @@ import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -85,8 +84,9 @@ public class Test extends Spider {
             bl(zj_b);
 
             test0.put("type_id", "0");
-            test0.put("type_name", "测试1:" + Base64
-                    .encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2));
+            String base664 = Base64
+                    .encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2);
+            test0.put("type_name", "测试1:" + base664);
             // test0.put("type_id", "0");
             // test0.put("type_name", "测试1:" + d);
             // test1.put("type_id", "1");
