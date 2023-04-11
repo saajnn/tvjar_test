@@ -77,23 +77,25 @@ public class Test extends Spider {
             System.out.println("获得fakedevice字节数组：\n");
             byte[] zj_fake = fakeDevice.getBytes("UTF-8");
             bl(zj_fake);
-            System.out.println("a函数返回的字节数组");
-            byte[] zj_a = a(tokenKey);
-            bl(zj_a);
+            // System.out.println("a函数返回的字节数组");
+            // byte[] zj_a = a(tokenKey);
+            // bl(zj_a);
             System.out.println("b函数返回的字节数组");
             byte[] zj_b = b(zj_fake, tokenKey);
             bl(zj_b);
 
+             test0.put("type_id", "0");
+             test0.put("type_name", "测试1:" +Base64.encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2););
             // test0.put("type_id", "0");
             // test0.put("type_name", "测试1:" + d);
             // test1.put("type_id", "1");
             // test1.put("type_name", "测试二:" + e);
 
-            // classes.put(test0);
+             classes.put(test0);
             // classes.put(test1);
 
             result.put("class", classes);
-            // return result.toString();
+             return result.toString();
 
         } catch (Exception e) {
             SpiderDebug.log(e);
@@ -209,25 +211,23 @@ public class Test extends Spider {
         int i10 = 0;
         for (int i11 = 0; i11 < bArr.length; i11++) {
             i9 = (i9 + 1) % 333;
-            System.out.println("i9:" + i9);
+            //// System.out.println("i9:" + i9);
             i10 = ((a[i9] & 255) + i10) % 333;
-            System.out.println("i10:" + i10);
+            // System.out.println("i10:" + i10);
             byte b = a[i9];
-            System.out.println("a[i9]:" + a[i9]);
-            System.out.println("b:" + b);
-            System.out.println("b和a[19]是否相等");
-            System.out.println("a[i10]:" + a[i10]);
+            // System.out.println("a[i9]:" + a[i9]);
+            // System.out.println("b:" + b);
+            // System.out.println("b和a[19]是否相等");
+            // System.out.println("a[i10]:" + a[i10]);
             a[i9] = a[i10];
-            System.out.println("a[i9]:" + a[i9]);
+            // System.out.println("a[i9]:" + a[i9]);
             a[i10] = b;
-            System.out.println("a[i10]:" + a[i10]);
-            int cs = a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11];
-            byte csb = (byte) cs;
-            System.out.println("cs:" + cs);
-            System.out.println("csb:" + csb);
-            System.out.println("cs和csb是否相等");
+            // System.out.println("a[i10]:" + a[i10]);
+            // System.out.println("cs:" + cs);
+            // System.out.println("csb:" + csb);
+            // System.out.println("cs和csb是否相等");
             bArr2[i11] = (byte) (a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11]);
-            System.out.println("a[i11]:" + a[i11]);
+            // System.out.println("a[i11]:" + a[i11]);
         }
         return bArr2;
     }
