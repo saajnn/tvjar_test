@@ -66,13 +66,24 @@ public class Test extends Spider {
             // test1.put("type_name", "测试二:" + e);
 
             fakeDevice = fakeDid();
+            // 测试fake
+            String fakeDevice = "||||B94264889291||I4hppZ10YEDPCUQO||unknown||Readmi/alioth/alioth:11/RKQ1.200826.002/V12.5.19.0.RKHCNXM:user/release-keys";
             String tokenKey = null;
-            System.out.println(fakeDevice);
-            byte[] cs = b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey);
-            for (int i = 0; i < cs.length; i++) {
-                System.out.print(cs[i]);
-                System.out.print(",");
+            System.out.println("获得fakedevice：\n" + fakeDevice);
+            if (tokenKey == null) {
+                tokenKey = "XPINGGUO";
             }
+            System.out.println("获得tokenKey：\n" + tokenKey);
+            System.out.println("获得fakedevice字节数组：\n");
+            byte[] zj_fake = fakeDevice.getBytes("UTF-8");
+            bl(zj_fake);
+            System.out.println("a函数返回的字节数组");
+            byte[] zj_a = a(tokenKey);
+            bl(zj_a);
+            System.out.println("b函数返回的字节数组");
+            byte[] zj_b = b(zj_fake, tokenKey);
+            bl(zj_b);
+
             // test0.put("type_id", "0");
             // test0.put("type_name", "测试1:" + d);
             // test1.put("type_id", "1");
@@ -146,7 +157,6 @@ public class Test extends Spider {
         StringBuilder sb = new StringBuilder(18);
         for (byte b : macAddr) {
             sb.append(String.format("%02X", b));
-            System.out.println(String.format("%02X", b));
         }
         return sb.toString();
     }
@@ -199,42 +209,34 @@ public class Test extends Spider {
         int i10 = 0;
         for (int i11 = 0; i11 < bArr.length; i11++) {
             i9 = (i9 + 1) % 333;
+            System.out.println("i9:" + i9);
             i10 = ((a[i9] & 255) + i10) % 333;
+            System.out.println("i10:" + i10);
             byte b = a[i9];
+            System.out.println("a[i9]:" + a[i9]);
+            System.out.println("b:" + b);
+            System.out.println("b和a[19]是否相等");
+            System.out.println("a[i10]:" + a[i10]);
             a[i9] = a[i10];
+            System.out.println("a[i9]:" + a[i9]);
             a[i10] = b;
+            System.out.println("a[i10]:" + a[i10]);
+            int cs = a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11];
+            byte csb = (byte) cs;
+            System.out.println("cs:" + cs);
+            System.out.println("csb:" + csb);
+            System.out.println("cs和csb是否相等");
             bArr2[i11] = (byte) (a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11]);
+            System.out.println("a[i11]:" + a[i11]);
         }
         return bArr2;
     }
 
-    String getMd5(String str) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(str.getBytes());
-            byte b[] = md.digest();
-
-            int i;
-
-            StringBuffer buf = new StringBuffer("");
-            for (int offset = 0; offset < b.length; offset++) {
-                i = b[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
-                buf.append(Integer.toHexString(i));
-            }
-            // System.out.println(buf.toString());
-            //
-            // 32位加密
-            return buf.toString();
-            // 16位的加密
-            // return buf.toString().substring(8, 24);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+    void bl(byte[] bt) {
+        for (int i = 0; i < bt.length; i++) {
+            System.out.print(bt[i]);
+            System.out.print(",");
         }
+        System.out.println();
     }
-
 }
