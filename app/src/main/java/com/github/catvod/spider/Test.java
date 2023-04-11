@@ -80,8 +80,8 @@ public class Test extends Spider {
             classes.put(test0);
 
             result.put("class", classes);
-            System.out.println(result.toString());
-            // return result.toString();
+            // System.out.println(result.toString());
+            return result.toString();
         } catch (Exception e) {
             SpiderDebug.log(e);
         }
