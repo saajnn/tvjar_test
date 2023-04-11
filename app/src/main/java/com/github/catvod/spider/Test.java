@@ -4,7 +4,7 @@ import android.content.Context;
 //import android.content.SharedPreferences;
 //import android.os.Build;
 //import android.text.TextUtils;
-//import android.util.Base64;
+import android.util.Base64;
 //
 import com.github.catvod.crawler.Spider;
 import com.github.catvod.crawler.SpiderDebug;
@@ -84,18 +84,19 @@ public class Test extends Spider {
             byte[] zj_b = b(zj_fake, tokenKey);
             bl(zj_b);
 
-             test0.put("type_id", "0");
-             test0.put("type_name", "测试1:" +Base64.encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2););
+            test0.put("type_id", "0");
+            test0.put("type_name", "测试1:" + Base64
+                    .encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2));
             // test0.put("type_id", "0");
             // test0.put("type_name", "测试1:" + d);
             // test1.put("type_id", "1");
             // test1.put("type_name", "测试二:" + e);
 
-             classes.put(test0);
+            classes.put(test0);
             // classes.put(test1);
 
             result.put("class", classes);
-             return result.toString();
+            return result.toString();
 
         } catch (Exception e) {
             SpiderDebug.log(e);
