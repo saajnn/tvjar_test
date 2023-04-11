@@ -1,11 +1,8 @@
 package com.github.catvod.spider;
 
 import android.content.Context;
-//import android.content.SharedPreferences;
-//import android.os.Build;
-//import android.text.TextUtils;
 import android.util.Base64;
-//
+
 import com.github.catvod.crawler.Spider;
 import com.github.catvod.crawler.SpiderDebug;
 import com.github.catvod.utils.Misc;
@@ -30,79 +27,59 @@ import okhttp3.Call;
 
 public class Test extends Spider {
 
-    private static final String siteUrl = "";
-
     public void init(Context context) {
         super.init(context);
     }
 
+    private static final String siteUrl = "http://ht.grelighting.cn/api.php";
+
+    private HashMap<String, String> getHeaders(String url, String data) {
+        HashMap<String, String> headers = new HashMap<>();
+        if (data != null) {
+            String token = "";
+            try {
+                token = Base64.encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey),
+                        2);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int currentTimeMillis = (int) (System.currentTimeMillis() / ((long) 1000));
+            String hash = md5(fakeDevice + data + currentTimeMillis).substring(8, 12);
+            headers.put("token", token);
+            headers.put("hash", hash);
+            headers.put("timestamp", currentTimeMillis + "");
+            if (tokenKey == null) {
+                headers.put("version", "ANDROID cn.grelighting.xpg1.1.5");
+            }
+        }
+        headers.put("User-Agent", "okhttp/4.9.1");
+        return headers;
+    }
+
     private String fakeDevice = null;
+    private String tokenKey = null;
 
     public String homeContent(boolean filter) {
         try {
+
+            fakeDevice = fakeDid();
+            String url = siteUrl + "/v2.user/tokenlogin";
+            HashMap<String, String> m = getHeaders(url, "ANDROID cn.grelighting.xpg1.1.5");
+            for (String key : m.keySet()) {
+                System.out.println(key);
+                System.out.println(m.get(key));
+
+            }
+
             JSONObject result = new JSONObject();
             JSONArray classes = new JSONArray();
 
             JSONObject test0 = new JSONObject();
-            JSONObject test1 = new JSONObject();
-
-            // String d = "N/A";
-            // try {
-            // d = Build.class.getField("SERIAL").get((Object) null).toString();
-            //
-            //////////// } catch (Exception unused) {
-            // }
-            // String e = "";
-            // try {
-            // e = (String) Class.forName("android.os.SystemProperties")
-            // .getDeclaredMethod("get", new Class[] { String.class })
-            // .invoke((Object) null, new Object[] { "ro.build.fingerprint" });
-            // } catch (Exception unused) {
-            // }
-            // test0.put("type_id", "0");
-            // test0.put("type_name", "测试1:" + d);
-            // test1.put("type_id", "1");
-            // test1.put("type_name", "测试二:" + e);
-
-            fakeDevice = fakeDid();
-            // 测试fake
-            String fakeDevice = "||||B94264889291||I4hppZ10YEDPCUQO||unknown||Readmi/alioth/alioth:11/RKQ1.200826.002/V12.5.19.0.RKHCNXM:user/release-keys";
-            String tokenKey = null;
-            System.out.println("获得fakedevice：\n" + fakeDevice);
-            if (tokenKey == null) {
-                tokenKey = "XPINGGUO";
-            }
-            System.out.println("获得tokenKey：\n" + tokenKey);
-            System.out.println("获得fakedevice字节数组：\n");
-            byte[] zj_fake = fakeDevice.getBytes("UTF-8");
-            bl(zj_fake);
-            // System.out.println("a函数返回的字节数组");
-            // byte[] zj_a = a(tokenKey);
-            // bl(zj_a);
-            System.out.println("b函数返回的字节数组");
-            byte[] zj_b = b(zj_fake, tokenKey);
-            bl(zj_b);
-
             test0.put("type_id", "0");
-            String base664 = Base64
-                    .encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2);
-            test0.put("type_name", "测试1:" + base664);
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put("1", "value1");
-            map.put("2", "value2");
-            map.put("3", "value3");
-
-            // test0.put("type_id", "0");
-            // test0.put("type_name", "测试1:" + d);
-            // test1.put("type_id", "1");
-            // test1.put("type_name", "测试二:" + e);
-
             classes.put(test0);
-            // classes.put(test1);
 
             result.put("class", classes);
             return result.toString();
-
         } catch (Exception e) {
             SpiderDebug.log(e);
         }
@@ -145,6 +122,54 @@ public class Test extends Spider {
         return "";
     }
 
+    String md5(String str) {
+        try {
+            MessageDigest instance = MessageDigest.getInstance("MD5");
+            instance.update(str.getBytes());
+            return new BigInteger(1, instance.digest()).toString(16);
+        } catch (Exception e9) {
+            e9.printStackTrace();
+            return str;
+        }
+    }
+
+    byte[] b(byte[] bArr, String str) {
+        byte[] a = a(str);
+        byte[] bArr2 = new byte[bArr.length];
+        int i9 = 0;
+        int i10 = 0;
+        for (int i11 = 0; i11 < bArr.length; i11++) {
+            i9 = (i9 + 1) % 333;
+            i10 = ((a[i9] & 255) + i10) % 333;
+            byte b = a[i9];
+            a[i9] = a[i10];
+            a[i10] = b;
+            bArr2[i11] = (byte) (a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11]);
+        }
+        return bArr2;
+    }
+
+    byte[] a(String str) {
+        byte[] bytes = str.getBytes();
+        byte[] bArr = new byte[333];
+        for (int i9 = 0; i9 < 333; i9++) {
+            bArr[i9] = (byte) i9;
+        }
+        if (bytes.length == 0) {
+            return null;
+        }
+        int i10 = 0;
+        int i11 = 0;
+        for (int i12 = 0; i12 < 333; i12++) {
+            i11 = (((bytes[i10] & 255) + (bArr[i12] & 255)) + i11) % 333;
+            byte b = bArr[i12];
+            bArr[i12] = bArr[i11];
+            bArr[i11] = b;
+            i10 = (i10 + 1) % bytes.length;
+        }
+        return bArr;
+    }
+
     String randomString(int length) {
         String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456";
         Random random = new Random();
@@ -169,27 +194,6 @@ public class Test extends Spider {
         return sb.toString();
     }
 
-    byte[] a(String str) {
-        byte[] bytes = str.getBytes();
-        byte[] bArr = new byte[333];
-        for (int i9 = 0; i9 < 333; i9++) {
-            bArr[i9] = (byte) i9;
-        }
-        if (bytes.length == 0) {
-            return null;
-        }
-        int i10 = 0;
-        int i11 = 0;
-        for (int i12 = 0; i12 < 333; i12++) {
-            i11 = (((bytes[i10] & 255) + (bArr[i12] & 255)) + i11) % 333;
-            byte b = bArr[i12];
-            bArr[i12] = bArr[i11];
-            bArr[i11] = b;
-            i10 = (i10 + 1) % bytes.length;
-        }
-        return bArr;
-    }
-
     String fakeDid() {
         String i = "";
         String f = "";
@@ -197,52 +201,5 @@ public class Test extends Spider {
         String d = "unknown";
         return (((((((((("" + i) + "||") + f) + "||") + randomMACAddress()) + "||") + randomString(16)) + "||") + d)
                 + "||") + e;
-    }
-
-    String md5(String str) {
-        try {
-            MessageDigest instance = MessageDigest.getInstance("MD5");
-            instance.update(str.getBytes());
-            return new BigInteger(1, instance.digest()).toString(16);
-        } catch (Exception e9) {
-            e9.printStackTrace();
-            return str;
-        }
-    }
-
-    byte[] b(byte[] bArr, String str) {
-        byte[] a = a(str);
-        byte[] bArr2 = new byte[bArr.length];
-        int i9 = 0;
-        int i10 = 0;
-        for (int i11 = 0; i11 < bArr.length; i11++) {
-            i9 = (i9 + 1) % 333;
-            //// System.out.println("i9:" + i9);
-            i10 = ((a[i9] & 255) + i10) % 333;
-            // System.out.println("i10:" + i10);
-            byte b = a[i9];
-            // System.out.println("a[i9]:" + a[i9]);
-            // System.out.println("b:" + b);
-            // System.out.println("b和a[19]是否相等");
-            // System.out.println("a[i10]:" + a[i10]);
-            a[i9] = a[i10];
-            // System.out.println("a[i9]:" + a[i9]);
-            a[i10] = b;
-            // System.out.println("a[i10]:" + a[i10]);
-            // System.out.println("cs:" + cs);
-            // System.out.println("csb:" + csb);
-            // System.out.println("cs和csb是否相等");
-            bArr2[i11] = (byte) (a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11]);
-            // System.out.println("a[i11]:" + a[i11]);
-        }
-        return bArr2;
-    }
-
-    void bl(byte[] bt) {
-        for (int i = 0; i < bt.length; i++) {
-            System.out.print(bt[i]);
-            System.out.print(",");
-        }
-        System.out.println();
     }
 }
