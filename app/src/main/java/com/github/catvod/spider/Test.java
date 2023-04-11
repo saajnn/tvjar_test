@@ -87,6 +87,11 @@ public class Test extends Spider {
             String base664 = Base64
                     .encodeToString(b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey), 2);
             test0.put("type_name", "测试1:" + base664);
+            HashMap<String, String> map = new HashMap<String, String>();
+            map.put("1", "value1");
+            map.put("2", "value2");
+            map.put("3", "value3");
+
             // test0.put("type_id", "0");
             // test0.put("type_name", "测试1:" + d);
             // test1.put("type_id", "1");
