@@ -1,11 +1,11 @@
 package com.github.catvod.spider;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.os.Build;
-import android.text.TextUtils;
-import android.util.Base64;
-
+//import android.content.SharedPreferences;
+//import android.os.Build;
+//import android.text.TextUtils;
+//import android.util.Base64;
+//
 import com.github.catvod.crawler.Spider;
 import com.github.catvod.crawler.SpiderDebug;
 import com.github.catvod.utils.Misc;
@@ -21,6 +21,7 @@ import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +37,8 @@ public class Test extends Spider {
         super.init(context);
     }
 
+    private String fakeDevice = null;
+
     public String homeContent(boolean filter) {
         try {
             JSONObject result = new JSONObject();
@@ -44,29 +47,42 @@ public class Test extends Spider {
             JSONObject test0 = new JSONObject();
             JSONObject test1 = new JSONObject();
 
-            String d = "N/A";
-            try {
-                d = Build.class.getField("SERIAL").get((Object) null).toString();
+            // String d = "N/A";
+            // try {
+            // d = Build.class.getField("SERIAL").get((Object) null).toString();
+            //
+            //////////// } catch (Exception unused) {
+            // }
+            // String e = "";
+            // try {
+            // e = (String) Class.forName("android.os.SystemProperties")
+            // .getDeclaredMethod("get", new Class[] { String.class })
+            // .invoke((Object) null, new Object[] { "ro.build.fingerprint" });
+            // } catch (Exception unused) {
+            // }
+            // test0.put("type_id", "0");
+            // test0.put("type_name", "测试1:" + d);
+            // test1.put("type_id", "1");
+            // test1.put("type_name", "测试二:" + e);
 
-            } catch (Exception unused) {
+            fakeDevice = fakeDid();
+            String tokenKey = null;
+            System.out.println(fakeDevice);
+            byte[] cs = b(fakeDevice.getBytes("UTF-8"), tokenKey == null ? "XPINGGUO" : tokenKey);
+            for (int i = 0; i < cs.length; i++) {
+                System.out.print(cs[i]);
+                System.out.print(",");
             }
-            String e = "";
-            try {
-                e = (String) Class.forName("android.os.SystemProperties")
-                        .getDeclaredMethod("get", new Class[] { String.class })
-                        .invoke((Object) null, new Object[] { "ro.build.fingerprint" });
-            } catch (Exception unused) {
-            }
-            test0.put("type_id", "0");
-            test0.put("type_name", "测试1:" + d);
-            test1.put("type_id", "1");
-            test1.put("type_name", "测试二:" + e);
+            // test0.put("type_id", "0");
+            // test0.put("type_name", "测试1:" + d);
+            // test1.put("type_id", "1");
+            // test1.put("type_name", "测试二:" + e);
 
-            classes.put(test0);
-            classes.put(test1);
+            // classes.put(test0);
+            // classes.put(test1);
 
             result.put("class", classes);
-            return result.toString();
+            // return result.toString();
 
         } catch (Exception e) {
             SpiderDebug.log(e);
@@ -137,9 +153,6 @@ public class Test extends Spider {
 
     byte[] a(String str) {
         byte[] bytes = str.getBytes();
-        for (int i = 0; i < bytes.length; i++) {
-            System.out.println(bytes[i]);
-        }
         byte[] bArr = new byte[333];
         for (int i9 = 0; i9 < 333; i9++) {
             bArr[i9] = (byte) i9;
@@ -162,20 +175,66 @@ public class Test extends Spider {
     String fakeDid() {
         String i = "";
         String f = "";
-        String d = "N/A";
-        try {
-        } catch (Exception unused) {
-        }
-        String e = "";
-        try {
-            e = (String) Class.forName("android.os.SystemProperties")
-                    .getDeclaredMethod("get", new Class[] { String.class })
-                    .invoke((Object) null, new Object[] { "ro.build.fingerprint" });
-        } catch (Exception unused) {
-            return "kkk";
-        }
+        String e = "Readmi/alioth/alioth:11/RKQ1.200826.002/V12.5.19.0.RKHCNXM:user/release-keys";
+        String d = "unknown";
         return (((((((((("" + i) + "||") + f) + "||") + randomMACAddress()) + "||") + randomString(16)) + "||") + d)
                 + "||") + e;
+    }
+
+    String md5(String str) {
+        try {
+            MessageDigest instance = MessageDigest.getInstance("MD5");
+            instance.update(str.getBytes());
+            return new BigInteger(1, instance.digest()).toString(16);
+        } catch (Exception e9) {
+            e9.printStackTrace();
+            return str;
+        }
+    }
+
+    byte[] b(byte[] bArr, String str) {
+        byte[] a = a(str);
+        byte[] bArr2 = new byte[bArr.length];
+        int i9 = 0;
+        int i10 = 0;
+        for (int i11 = 0; i11 < bArr.length; i11++) {
+            i9 = (i9 + 1) % 333;
+            i10 = ((a[i9] & 255) + i10) % 333;
+            byte b = a[i9];
+            a[i9] = a[i10];
+            a[i10] = b;
+            bArr2[i11] = (byte) (a[((a[i9] & 255) + (a[i10] & 255)) % 333] ^ bArr[i11]);
+        }
+        return bArr2;
+    }
+
+    String getMd5(String str) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(str.getBytes());
+            byte b[] = md.digest();
+
+            int i;
+
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
+            }
+            // System.out.println(buf.toString());
+            //
+            // 32位加密
+            return buf.toString();
+            // 16位的加密
+            // return buf.toString().substring(8, 24);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
