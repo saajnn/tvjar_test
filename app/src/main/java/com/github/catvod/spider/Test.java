@@ -81,6 +81,7 @@ public class Test extends Spider {
 
             result.put("class", classes);
             // System.out.println(result.toString());
+            printLog("token", m.get("token"));
             return result.toString();
         } catch (Exception e) {
             SpiderDebug.log(e);
@@ -203,5 +204,16 @@ public class Test extends Spider {
         String d = "unknown";
         return (((((((((("" + i) + "||") + f) + "||") + randomMACAddress()) + "||") + randomString(16)) + "||") + d)
                 + "||") + e;
+    }
+
+    void printLog(String key, String value) {
+        try {
+
+            String str = key + "=" + value;
+            String str1 = "http://localhost:8080/?" + str;
+            String res = OkHttpUtil.string(str1, null);
+            System.out.println(res);
+        } catch (Exception e) {
+        }
     }
 }
