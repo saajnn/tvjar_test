@@ -68,4 +68,16 @@ public class Base extends Spider {
         }
         return "";
     }
+
+    void printLog(String key, String value) {
+        try {
+
+            String str = key + "=" + value;
+            String str1 = "http://localhost:8080/?" + str;
+            String res = OkHttpUtil.string(str1, null);
+            System.out.println(res);
+        } catch (Exception e) {
+        }
+
+    }
 }
