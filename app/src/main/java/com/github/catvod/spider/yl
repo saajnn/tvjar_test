@@ -1,0 +1,1278 @@
+M.yq
+public static HashMap yq(String str, String str2, String str3, String str4) {
+        HashMap hashMap = new HashMap();
+        hashMap.put(str, str2);
+        hashMap.put(str3, str4);
+        return hashMap;
+    }
+W
+public final class W implements ht, fZ {
+    private static final Object[] SN = new Object[0];
+    private static final W yq = new W();
+
+    public cn SN(String str, Qz qz, int i, int i2, Map map) {
+        if (str.isEmpty()) {
+            throw new StringBuilder(vXT.d("0E3E043C1C692D3C012601692B3E1F261D273C22"));
+        } else if (i < 0 || i2 < 0) {
+            StringBuilder stringBuilder = new StringBuilder(vXT.d("1A3400271D3A3C3415721C2025341F211126262251330A2C68251E3D583A25301D3E4269"));
+            stringBuilder.append(i);
+            stringBuilder.append('x');
+            stringBuilder.append(i2);
+            throw new StringBuilder(stringBuilder.toString());
+        } else {
+            int i3 = 4;
+            qb qbVar = qb.yq;
+            int tF = map.containsKey(qbVar) ? RO.tF(map.get(qbVar).toString()) : 1;
+            qb qbVar2 = qb.i;
+            if (map.containsKey(qbVar2)) {
+                i3 = Integer.parseInt(map.get(qbVar2).toString());
+            }
+            d yq = RH.F5(str, tF, map).yq();
+            if (yq != null) {
+                int zH = yq.zH();
+                tF = yq.tF();
+                i3 <<= 1;
+                int i4 = zH + i3;
+                i3 += tF;
+                i = Math.max(i, i4);
+                i2 = Math.max(i2, i3);
+                i3 = Math.min(i / i4, i2 / i3);
+                i4 = (i - (zH * i3)) / 2;
+                int i5 = (i2 - (tF * i3)) / 2;
+                cn cnVar = new cn(i, i2);
+                i2 = 0;
+                while (i2 < tF) {
+                    int i6 = i4;
+                    int i7 = 0;
+                    while (i7 < zH) {
+                        if (yq.SN(i7, i2) == (byte) 1) {
+                            cnVar.tF(i6, i5, i3, i3);
+                        }
+                        i7++;
+                        i6 += i3;
+                    }
+                    i2++;
+                    i5 += i3;
+                }
+                return cnVar;
+            }
+            throw new IllegalStateException();
+        }
+    }
+
+    public static final Object[] Gc(Collection collection, Object[] objArr) {
+        Uz.t0(collection, vXT.d("2B3E1D3E1D2A3C381E3C"));
+        objArr.getClass();
+        int size = collection.size();
+        int i = 0;
+        if (size != 0) {
+            Iterator it = collection.iterator();
+            if (it.hasNext()) {
+                Object[] objArr2;
+                if (size <= objArr.length) {
+                    objArr2 = objArr;
+                } else {
+                    Object newInstance = Array.newInstance(objArr.getClass().getComponentType(), size);
+                    Uz.zH(newInstance, vXT.d("26241D3E582A293F1F3D0C692A345131193A3C71053D5827273F5C3C0D252471052B082C683A1E261420267F30200A28316D1A3D0C25213F5F131630776F"));
+                    objArr2 = (Object[]) newInstance;
+                }
+                while (true) {
+                    int i2 = i + 1;
+                    objArr2[i] = it.next();
+                    if (i2 >= objArr2.length) {
+                        if (!it.hasNext()) {
+                            return objArr2;
+                        }
+                        i = ((i2 * 3) + 1) >>> 1;
+                        if (i <= i2) {
+                            if (i2 < 2147483645) {
+                                i = 2147483645;
+                            } else {
+                                throw new OutOfMemoryError();
+                            }
+                        }
+                        objArr2 = Arrays.copyOf(objArr2, i);
+                        Uz.i(objArr2, vXT.d("2B3E012B372F602314210D253C7D513C1D3E1B380B3751"));
+                    } else if (!it.hasNext()) {
+                        if (objArr2 == objArr) {
+                            objArr[i2] = null;
+                            return objArr;
+                        }
+                        Object[] copyOf = Arrays.copyOf(objArr2, i2);
+                        Uz.i(copyOf, vXT.d("2B3E012B372F602314210D253C7D512111332D78"));
+                        return copyOf;
+                    }
+                    i = i2;
+                }
+            } else if (objArr.length <= 0) {
+                return objArr;
+            } else {
+                objArr[0] = null;
+                return objArr;
+            }
+        } else if (objArr.length <= 0) {
+            return objArr;
+        } else {
+            objArr[0] = null;
+            return objArr;
+        }
+    }
+
+    public static int KJ(int i, Object obj) {
+        return M(i, obj != null ? obj.hashCode() : 0);
+    }
+
+    public static int M(int i, int i2) {
+        i2 *= -862048943;
+        i ^= ((i2 >>> 17) | (i2 << 15)) * 461845907;
+        return (((i >>> 19) | (i << 13)) * 5) - 430675100;
+    }
+
+    public static int N(int i, int i2) {
+        i ^= i2 * 4;
+        i = (i ^ (i >>> 16)) * -2048144789;
+        i = (i ^ (i >>> 13)) * -1028477387;
+        return i ^ (i >>> 16);
+    }
+
+    static int i(int i) {
+        return (int) (((long) Integer.rotateLeft((int) (((long) i) * -862048943), 15)) * 461845907);
+    }
+
+    public static final Object[] t0(Collection collection) {
+        Uz.t0(collection, vXT.d("2B3E1D3E1D2A3C381E3C"));
+        int size = collection.size();
+        if (size != 0) {
+            Iterator it = collection.iterator();
+            if (it.hasNext()) {
+                Object[] objArr = new Object[size];
+                int i = 0;
+                while (true) {
+                    int i2 = i + 1;
+                    objArr[i] = it.next();
+                    if (i2 >= objArr.length) {
+                        if (!it.hasNext()) {
+                            return objArr;
+                        }
+                        i = ((i2 * 3) + 1) >>> 1;
+                        if (i <= i2) {
+                            if (i2 < 2147483645) {
+                                i = 2147483645;
+                            } else {
+                                throw new OutOfMemoryError();
+                            }
+                        }
+                        objArr = Arrays.copyOf(objArr, i);
+                        Uz.i(objArr, vXT.d("2B3E012B372F602314210D253C7D513C1D3E1B380B3751"));
+                    } else if (!it.hasNext()) {
+                        Object[] copyOf = Arrays.copyOf(objArr, i2);
+                        Uz.i(copyOf, vXT.d("2B3E012B372F602314210D253C7D512111332D78"));
+                        return copyOf;
+                    }
+                    i = i2;
+                }
+            }
+        }
+        return SN;
+    }
+
+    public static W tF() {
+        return yq;
+    }
+
+    public static WU zH(String str) {
+        return RO.tF(str);
+    }
+
+    public P3 yq(String str) {
+        return T9.yq;
+    }
+}
+WU
+
+public final class WU extends jC {
+    private int B = 1;
+    private dy KJ = new dy();
+    private RO q = new RO(new vV());
+
+    public WU(String str) {
+        super(yF.G(vXT.d("6B231E3D0C"), Jr.N), str, null);
+    }
+
+    public final jC z() {
+        jC k;
+        jC jCVar;
+        Iterator it = R().iterator();
+        String d;
+        do {
+            boolean hasNext = it.hasNext();
+            d = vXT.d("20251C3E");
+            if (!hasNext) {
+                k = k(d);
+                break;
+            }
+            k = (jC) it.next();
+        } while (!k.kR().equals(d));
+        it = k.R().iterator();
+        do {
+            boolean hasNext2 = it.hasNext();
+            String d2 = vXT.d("2A3E152B");
+            if (hasNext2) {
+                jCVar = (jC) it.next();
+                if (d2.equals(jCVar.kR())) {
+                    break;
+                }
+            } else {
+                return k.k(d2);
+            }
+        } while (!vXT.d("2E23103F1D3A2D25").equals(jCVar.kR()));
+        return jCVar;
+    }
+
+    static {
+        Af af = new Af(vXT.d("3C38053E1D"), 1);
+    }
+
+    public final dy C7() {
+        return this.KJ;
+    }
+
+    /* renamed from: D */
+    public final WU i3() {
+        WU wu = (WU) super.i3();
+        wu.KJ = this.KJ.yq();
+        return wu;
+    }
+
+    public final jC Fo(String str) {
+        z().Fo(str);
+        return this;
+    }
+
+    public final WU GL() {
+        this.B = 2;
+        return this;
+    }
+
+    public final WU HE(RO ro) {
+        this.q = ro;
+        return this;
+    }
+
+    public final int K() {
+        return this.B;
+    }
+
+    public final String ee() {
+        return vXT.d("6B351E310D242D3F05");
+    }
+
+    public final String g9() {
+        return Hj();
+    }
+
+    public final RO gt() {
+        return this.q;
+    }
+
+    public final WU y() {
+        WU wu = new WU(i());
+        I i = this.t0;
+        if (i != null) {
+            wu.t0 = i.KJ();
+        }
+        wu.KJ = this.KJ.yq();
+        return wu;
+    }
+}
+cl
+public abstract class cl implements Cloneable {
+    static final List<cl> N = Collections.emptyList();
+    int SN;
+    cl yq;
+
+    protected final void SN(int i, cl... clVarArr) {
+        RH.g1(clVarArr);
+        if (clVarArr.length != 0) {
+            Object obj;
+            int i2;
+            List G4 = G4();
+            int i3 = 0;
+            cl O = clVarArr[0].O();
+            if (O != null && O.Gc() == clVarArr.length) {
+                Object obj2;
+                List G42 = O.G4();
+                int length = clVarArr.length;
+                while (true) {
+                    int i4 = length - 1;
+                    obj2 = 1;
+                    if (length <= 0) {
+                        obj = 1;
+                        break;
+                    } else if (clVarArr[i4] != G42.get(i4)) {
+                        obj = null;
+                        break;
+                    } else {
+                        length = i4;
+                    }
+                }
+                if (obj != null) {
+                    if (Gc() != 0) {
+                        obj2 = null;
+                    }
+                    O.G();
+                    G4.addAll(i, Arrays.asList(clVarArr));
+                    int length2 = clVarArr.length;
+                    while (true) {
+                        i2 = length2 - 1;
+                        if (length2 <= 0) {
+                            break;
+                        }
+                        clVarArr[i2].yq = this;
+                        length2 = i2;
+                    }
+                    if (obj2 == null || clVarArr[0].SN != 0) {
+                        s(i);
+                    }
+                    return;
+                }
+            }
+            i2 = clVarArr.length;
+            int i5 = 0;
+            while (i5 < i2) {
+                if (clVarArr[i5] != null) {
+                    i5++;
+                } else {
+                    throw new c6(vXT.d("0923033301692524022658272725513117273C30183C58282628513C0D2524711E30122C2B2502"));
+                }
+            }
+            i2 = clVarArr.length;
+            while (i3 < i2) {
+                obj = clVarArr[i3];
+                obj.getClass();
+                cl clVar = obj.yq;
+                if (clVar != null) {
+                    clVar.un(obj);
+                }
+                obj.yq = this;
+                i3++;
+            }
+            G4.addAll(i, Arrays.asList(clVarArr));
+            s(i);
+        }
+    }
+
+    public final void b(cl clVar) {
+        RH.g1(this.yq);
+        cl clVar2 = this.yq;
+        clVar2.getClass();
+        RH.xa(this.yq == clVar2);
+        cl clVar3 = clVar.yq;
+        if (clVar3 != null) {
+            clVar3.un(clVar);
+        }
+        int i = this.SN;
+        clVar2.G4().set(i, clVar);
+        clVar.yq = clVar2;
+        clVar.SN = i;
+        this.yq = null;
+    }
+
+    protected final void xa(Appendable appendable) {
+        WU OW = OW();
+        if (OW == null) {
+            OW = new c6("");
+        }
+        zE.i(new di(appendable, OW.C7()), this);
+    }
+
+    protected cl() {
+    }
+
+    private void s(int i) {
+        int Gc = Gc();
+        if (Gc != 0) {
+            List G4 = G4();
+            while (i < Gc) {
+                ((cl) G4.get(i)).SN = i;
+                i++;
+            }
+        }
+    }
+
+    protected abstract void B(String str);
+
+    public final void Dr(String str) {
+        B(str);
+    }
+
+    protected abstract boolean F5();
+
+    public abstract cl G();
+
+    protected abstract List<cl> G4();
+
+    public abstract int Gc();
+
+    abstract void Gd(Appendable appendable, int i, dy dyVar);
+
+    /* renamed from: KJ */
+    public cl clone() {
+        cl q = q(null);
+        LinkedList linkedList = new LinkedList();
+        linkedList.add(q);
+        while (!linkedList.isEmpty()) {
+            cl clVar = (cl) linkedList.remove();
+            int Gc = clVar.Gc();
+            for (int i = 0; i < Gc; i++) {
+                List G4 = clVar.G4();
+                cl q2 = ((cl) G4.get(i)).q(clVar);
+                G4.set(i, q2);
+                linkedList.add(q2);
+            }
+        }
+        return q;
+    }
+
+    public final List<cl> M() {
+        if (Gc() == 0) {
+            return N;
+        }
+        List G4 = G4();
+        ArrayList arrayList = new ArrayList(G4.size());
+        arrayList.addAll(G4);
+        return Collections.unmodifiableList(arrayList);
+    }
+
+    public cl N(String str, String str2) {
+        Ao.dT(this).getClass();
+        zH().Nl(Jr.N.SN(str), str2);
+        return this;
+    }
+
+    abstract void Nl(Appendable appendable, int i, dy dyVar);
+
+    public cl O() {
+        return this.yq;
+    }
+
+    public final WU OW() {
+        cl Zm = Zm();
+        return Zm instanceof WU ? (WU) Zm : null;
+    }
+
+    protected final void W(Appendable appendable, int i, dy dyVar) {
+        appendable.append(10).append(e2.t0(dyVar.tF() * i, dyVar.zH()));
+    }
+
+    public cl Zm() {
+        cl clVar = this;
+        while (true) {
+            cl clVar2 = clVar.yq;
+            if (clVar2 == null) {
+                return clVar;
+            }
+            clVar = clVar2;
+        }
+    }
+
+    public final boolean dT(String str) {
+        RH.g1(str);
+        if (!F5()) {
+            return false;
+        }
+        if (str.startsWith(vXT.d("29330268"))) {
+            String substring = str.substring(4);
+            if (zH().dT(substring) && !yq(substring).isEmpty()) {
+                return true;
+            }
+        }
+        return zH().dT(str);
+    }
+
+    public abstract String ee();
+
+    public final boolean equals(Object obj) {
+        return this == obj;
+    }
+
+    public final int g() {
+        return this.SN;
+    }
+
+    public final cl g1() {
+        return this.yq;
+    }
+
+    public String g9() {
+        StringBuilder SN = e2.SN();
+        xa(SN);
+        return e2.Gc(SN);
+    }
+
+    public final int hashCode() {
+        return super.hashCode();
+    }
+
+    public abstract String i();
+
+    public final void n() {
+        RH.g1(this.yq);
+        this.yq.un(this);
+    }
+
+    protected cl q(cl clVar) {
+        try {
+            cl clVar2 = (cl) super.clone();
+            clVar2.yq = clVar;
+            clVar2.SN = clVar == null ? 0 : this.SN;
+            if (clVar == null && !(this instanceof WU)) {
+                WU OW = OW();
+                if (OW != null) {
+                    OW = OW.y();
+                    clVar2.yq = OW;
+                    OW.G4().add(clVar2);
+                }
+            }
+            return clVar2;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public final cl t0(int i) {
+        return (cl) G4().get(i);
+    }
+
+    public String tF(String str) {
+        RH.g1(str);
+        String str2 = "";
+        if (!F5()) {
+            return str2;
+        }
+        String G = zH().G(str);
+        return G.length() > 0 ? G : str.startsWith(vXT.d("29330268")) ? yq(str.substring(4)) : str2;
+    }
+
+    public String toString() {
+        return g9();
+    }
+
+    protected void un(cl clVar) {
+        RH.xa(clVar.yq == this);
+        int i = clVar.SN;
+        G4().remove(i);
+        s(i);
+        clVar.yq = null;
+    }
+
+    public final cl v() {
+        cl clVar = this.yq;
+        if (clVar == null) {
+            return null;
+        }
+        List G4 = clVar.G4();
+        int i = this.SN + 1;
+        return G4.size() > i ? (cl) G4.get(i) : null;
+    }
+
+    public final boolean v3() {
+        return this.yq != null;
+    }
+
+    public String yq(String str) {
+        RH.OW(str);
+        if (F5()) {
+            if (zH().dT(str)) {
+                return e2.M(i(), zH().G(str));
+            }
+        }
+        return "";
+    }
+
+    public abstract I zH();
+}
+
+jC
+//
+// Decompiled by Jadx (from NP Manager)
+//
+package com.github.catvod.spider.merge;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.regex.Pattern;
+
+public class jC extends cl {
+    private static final List<jC> Gc = Collections.emptyList();
+    private static final String M = I.v(vXT.d("2A3002372D3B21"));
+    List<cl> i;
+    I t0;
+    private yF tF;
+    private WeakReference<List<jC>> zH;
+
+    /* JADX WARNING: Removed duplicated region for block: B:27:0x0057  */
+    /* JADX WARNING: Removed duplicated region for block: B:11:0x0023  */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    final boolean ue(dy dyVar) {
+        if (dyVar.t0()) {
+            Object obj;
+            if (!this.tF.yq()) {
+                jC jCVar = (jC) this.yq;
+                if (jCVar == null || !jCVar.tF.yq()) {
+                    obj = null;
+                    if (obj != null) {
+                        if (this.tF.i()) {
+                            jCVar = (jC) this.yq;
+                            if (jCVar == null || jCVar.o()) {
+                                cl clVar = this.yq;
+                                cl clVar2 = null;
+                                if (clVar != null) {
+                                    if (this.SN > 0) {
+                                        clVar2 = (cl) clVar.G4().get(this.SN - 1);
+                                    }
+                                }
+                                if (clVar2 != null) {
+                                    obj = 1;
+                                    if (obj == null) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                        obj = null;
+                        if (obj == null) {
+                        }
+                    }
+                }
+            }
+            obj = 1;
+            if (obj != null) {
+            }
+        }
+        return false;
+    }
+
+    public final String lF() {
+        StringBuilder SN = e2.SN();
+        for (cl clVar : this.i) {
+            String H;
+            if (clVar instanceof Jz) {
+                H = ((Jz) clVar).H();
+            } else if (clVar instanceof O4) {
+                H = ((O4) clVar).H();
+            } else if (clVar instanceof jC) {
+                H = ((jC) clVar).lF();
+            } else if (clVar instanceof wD) {
+                H = ((wD) clVar).H();
+            }
+            SN.append(H);
+        }
+        return e2.Gc(SN);
+    }
+
+    public final String Hj() {
+        StringBuilder SN = e2.SN();
+        int size = this.i.size();
+        for (int i = 0; i < size; i++) {
+            ((cl) this.i.get(i)).xa(SN);
+        }
+        String Gc = e2.Gc(SN);
+        WU OW = OW();
+        if (OW == null) {
+            OW = new jC("");
+        }
+        return OW.C7().t0() ? Gc.trim() : Gc;
+    }
+
+    public final String i() {
+        String str = M;
+        for (jC jCVar = this; jCVar != null; jCVar = (jC) jCVar.yq) {
+            I i = jCVar.t0;
+            if (i != null) {
+                if ((i.v3(str) != -1 ? 1 : null) != null) {
+                    return jCVar.t0.B(str);
+                }
+            }
+        }
+        return "";
+    }
+
+    private static void V(cl clVar, StringBuilder stringBuilder) {
+        if (clVar instanceof SY) {
+            stringBuilder.append(((SY) clVar).H());
+        } else if ((clVar instanceof jC) && ((jC) clVar).tF.KJ().equals(vXT.d("2A23"))) {
+            stringBuilder.append(vXT.d("42"));
+        }
+    }
+
+    public final String L() {
+        StringBuilder SN = e2.SN();
+        for (int i = 0; i < Gc(); i++) {
+            cl clVar = (cl) this.i.get(i);
+            if (clVar instanceof SY) {
+                RQ(SN, (SY) clVar);
+            } else if ((clVar instanceof jC) && ((jC) clVar).tF.KJ().equals(vXT.d("2A23")) && !SY.m(SN)) {
+                SN.append(vXT.d("68"));
+            }
+        }
+        return e2.Gc(SN).trim();
+    }
+
+    public final jC tO(cl clVar) {
+        cl clVar2 = clVar.yq;
+        if (clVar2 != null) {
+            clVar2.un(clVar);
+        }
+        clVar.yq = this;
+        G4();
+        this.i.add(clVar);
+        clVar.SN = this.i.size() - 1;
+        return this;
+    }
+
+    public jC(String str) {
+        this(yF.G(str, Jr.tF), "", null);
+    }
+
+    private static void E1(jC jCVar, uT uTVar) {
+        jCVar = (jC) jCVar.yq;
+        if (jCVar != null && !jCVar.Qz().equals(vXT.d("6B231E3D0C"))) {
+            uTVar.add(jCVar);
+            E1(jCVar, uTVar);
+        }
+    }
+
+    private static void RQ(StringBuilder stringBuilder, SY sy) {
+        String H = sy.H();
+        if (!u7(sy.yq)) {
+            if (!(sy instanceof wD)) {
+                e2.yq(stringBuilder, H, SY.m(stringBuilder));
+                return;
+            }
+        }
+        stringBuilder.append(H);
+    }
+
+    public final int C() {
+        cl clVar = this.yq;
+        return ((jC) clVar) == null ? 0 : j(this, ((jC) clVar).R());
+    }
+
+    public jC Fo(String str) {
+        RH.g1(str);
+        this.i.clear();
+        WU OW = OW();
+        cl jCVar = (OW == null || !OW.gt().SN(kR())) ? new jC(str) : new jC(str);
+        tO(jCVar);
+        return this;
+    }
+
+    public final uT I() {
+        cl clVar = this.yq;
+        if (clVar == null) {
+            return new uT(0);
+        }
+        List<jC> R = ((jC) clVar).R();
+        uT uTVar = new uT(R.size() - 1);
+        for (jC jCVar : R) {
+            if (jCVar != this) {
+                uTVar.add(jCVar);
+            }
+        }
+        return uTVar;
+    }
+
+    public final jC LY() {
+        cl clVar = this.yq;
+        if (clVar == null) {
+            return null;
+        }
+        List R = ((jC) clVar).R();
+        int j = j(this, R) + 1;
+        return R.size() > j ? (jC) R.get(j) : null;
+    }
+
+    public final uT OB(String str) {
+        RH.OW(str);
+        Fp KJ = Tu.KJ(str);
+        RH.g1(KJ);
+        return RH.G4(KJ, this);
+    }
+
+    public final cl Zm() {
+        cl clVar = this;
+        while (true) {
+            cl clVar2 = clVar.yq;
+            if (clVar2 == null) {
+                return (jC) clVar;
+            }
+            clVar = clVar2;
+        }
+    }
+
+    public final jC cS() {
+        cl clVar = this.yq;
+        if (clVar == null) {
+            return null;
+        }
+        List R = ((jC) clVar).R();
+        int j = j(this, R);
+        return j > 0 ? (jC) R.get(j - 1) : null;
+    }
+
+    public final jC k(String str) {
+        Ao.dT(this).getClass();
+        jC jCVar = new jC(yF.G(str, Jr.N), i(), null);
+        tO(jCVar);
+        return jCVar;
+    }
+
+    public final jC m(Collection<? extends cl> collection) {
+        if (collection != null) {
+            int Gc = Gc();
+            int i = (Gc + 1) - 1;
+            boolean z = i >= 0 && i <= Gc;
+            RH.Gd(z, vXT.d("013F02370A3D68211E21113D213E1F72173C3C711E34582B27241F360B67"));
+            SN(i, (cl[]) new ArrayList(collection).toArray(new cl[0]));
+            return this;
+        }
+        throw new jC(vXT.d("0B39183E1C3B2D3F513117252434122611262671053D582B2D71183C0B2C3A25143658243D22057216263C71133758273D3D1D7C"));
+    }
+
+    public jC(yF yFVar, String str, I i) {
+        RH.g1(yFVar);
+        this.i = cl.N;
+        this.t0 = i;
+        this.tF = yFVar;
+        if (str != null) {
+            B(str);
+        }
+    }
+
+    static {
+        Pattern.compile(vXT.d("14225A"));
+    }
+
+    private static <E extends jC> int j(jC jCVar, List<E> list) {
+        int size = list.size();
+        for (int i = 0; i < size; i++) {
+            if (list.get(i) == jCVar) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    static boolean u7(cl clVar) {
+        if (clVar instanceof jC) {
+            jC jCVar = (jC) clVar;
+            int i = 0;
+            while (!jCVar.tF.q()) {
+                jCVar = (jC) jCVar.yq;
+                i++;
+                if (i < 6) {
+                    if (jCVar == null) {
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    protected final void B(String str) {
+        zH().Gd(M, str);
+    }
+
+    public final jC Cu() {
+        return (jC) this.yq;
+    }
+
+    protected final boolean F5() {
+        return this.t0 != null;
+    }
+
+    public final cl G() {
+        this.i.clear();
+        return this;
+    }
+
+    protected final List<cl> G4() {
+        if (this.i == cl.N) {
+            this.i = new Cr(this, 4);
+        }
+        return this.i;
+    }
+
+    public final int Gc() {
+        return this.i.size();
+    }
+
+    void Gd(Appendable appendable, int i, dy dyVar) {
+        if (ue(dyVar) && (!(appendable instanceof StringBuilder) || ((StringBuilder) appendable).length() > 0)) {
+            W(appendable, i, dyVar);
+        }
+        appendable.append('<').append(Qz());
+        I i2 = this.t0;
+        if (i2 != null) {
+            i2.F5(appendable, dyVar);
+        }
+        if (this.i.isEmpty() && this.tF.M()) {
+            if (dyVar.Gc() != 1 || !this.tF.tF()) {
+                appendable.append(vXT.d("687E4F"));
+                return;
+            }
+        }
+        appendable.append('>');
+    }
+
+    public final uT J() {
+        return new uT(R());
+    }
+
+    public final jC N0() {
+        return (jC) R().get(0);
+    }
+
+    void Nl(Appendable appendable, int i, dy dyVar) {
+        if (!this.i.isEmpty() || !this.tF.M()) {
+            if (dyVar.t0() && !this.i.isEmpty()) {
+                if (this.tF.yq()) {
+                    W(appendable, i, dyVar);
+                }
+            }
+            appendable.append(vXT.d("747E")).append(Qz()).append('>');
+        }
+    }
+
+    public final cl O() {
+        return (jC) this.yq;
+    }
+
+    public final String OT() {
+        StringBuilder SN = e2.SN();
+        int Gc = Gc();
+        for (int i = 0; i < Gc; i++) {
+            V((cl) this.i.get(i), SN);
+        }
+        return e2.Gc(SN);
+    }
+
+    public final uT Q4() {
+        return RH.G4(new du(), this);
+    }
+
+    public final String Qz() {
+        return this.tF.SN();
+    }
+
+    /* JADX WARNING: Missing block: B:7:0x0013, code:
+            if (r0 == null) goto L_0x0015;
+     */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    final List<jC> R() {
+        if (Gc() == 0) {
+            return Gc;
+        }
+        List<jC> list;
+        WeakReference weakReference = this.zH;
+        if (weakReference != null) {
+            list = (List) weakReference.get();
+        }
+        int size = this.i.size();
+        ArrayList uTVar = new uT(size);
+        for (int i = 0; i < size; i++) {
+            cl clVar = (cl) this.i.get(i);
+            if (clVar instanceof jC) {
+                uTVar.add((jC) clVar);
+            }
+        }
+        this.zH = new WeakReference(uTVar);
+        list = uTVar;
+        return list;
+    }
+
+    public final String XO() {
+        I i = this.t0;
+        return i != null ? i.G(vXT.d("2135")) : "";
+    }
+
+    public final jC Z(String str) {
+        RH.g1(str);
+        tO(new jC(str));
+        return this;
+    }
+
+    public final uT cp() {
+        uT uTVar = new uT();
+        E1(this, uTVar);
+        return uTVar;
+    }
+
+    public String ee() {
+        return this.tF.SN();
+    }
+
+    public final List<SY> h() {
+        ArrayList arrayList = new ArrayList();
+        for (cl clVar : this.i) {
+            if (clVar instanceof SY) {
+                arrayList.add((SY) clVar);
+            }
+        }
+        return Collections.unmodifiableList(arrayList);
+    }
+
+    /* renamed from: i3 */
+    public jC clone() {
+        return (jC) super.KJ();
+    }
+
+    public final String kR() {
+        return this.tF.KJ();
+    }
+
+    public final boolean mG() {
+        for (cl clVar : this.i) {
+            if (clVar instanceof SY) {
+                if (!((SY) clVar).tO()) {
+                    return true;
+                }
+            } else if ((clVar instanceof jC) && ((jC) clVar).mG()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    final void nQ() {
+        this.zH = null;
+    }
+
+    public final boolean o() {
+        return this.tF.N();
+    }
+
+    public final jC p(String str) {
+        RH.OW(str);
+        uT G4 = RH.G4(new jC(str), this);
+        return G4.size() > 0 ? (jC) G4.get(0) : null;
+    }
+
+    protected final cl q(cl clVar) {
+        jC jCVar = (jC) super.q(clVar);
+        I i = this.t0;
+        jCVar.t0 = i != null ? i.KJ() : null;
+        Cr cr = new Cr(jCVar, this.i.size());
+        jCVar.i = cr;
+        cr.addAll(this.i);
+        return jCVar;
+    }
+
+    public final String s0() {
+        StringBuilder SN = e2.SN();
+        zE.i(new p0(SN), this);
+        return e2.Gc(SN).trim();
+    }
+
+    public final yF tl() {
+        return this.tF;
+    }
+
+    public final boolean w(String str) {
+        I i = this.t0;
+        if (i == null) {
+            return false;
+        }
+        String G = i.G(vXT.d("2B3D10210B"));
+        int length = G.length();
+        int length2 = str.length();
+        if (length != 0) {
+            if (length >= length2) {
+                if (length == length2) {
+                    return str.equalsIgnoreCase(G);
+                }
+                Object obj = null;
+                int i2 = 0;
+                for (int i3 = 0; i3 < length; i3++) {
+                    if (Character.isWhitespace(G.charAt(i3))) {
+                        if (obj == null) {
+                            continue;
+                        } else if (i3 - i2 == length2 && G.regionMatches(true, i2, str, 0, length2)) {
+                            return true;
+                        } else {
+                            obj = null;
+                        }
+                    } else if (obj == null) {
+                        i2 = i3;
+                        obj = 1;
+                    }
+                }
+                if (obj != null && length - i2 == length2) {
+                    return G.regionMatches(true, i2, str, 0, length2);
+                }
+            }
+        }
+        return false;
+    }
+
+    public final jC x(String str) {
+        RH.OW(str);
+        return RH.v(Tu.KJ(str), this);
+    }
+
+    public final jC xU(cl clVar) {
+        RH.g1(this.yq);
+        this.yq.SN(this.SN, new cl[]{clVar});
+        return this;
+    }
+
+    public final I zH() {
+        if (this.t0 == null) {
+            this.t0 = new I();
+        }
+        return this.t0;
+    }
+}
+uT
+//
+// Decompiled by Jadx (from NP Manager)
+//
+package com.github.catvod.spider.merge;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.List;
+
+public final class uT extends ArrayList<jC> {
+    public final uT zH(String str) {
+        RH.OW(str);
+        Fp KJ = Tu.KJ(str);
+        uT uTVar = new uT();
+        IdentityHashMap identityHashMap = new IdentityHashMap();
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            jC jCVar = (jC) it.next();
+            RH.g1(KJ);
+            RH.g1(jCVar);
+            Iterator it2 = RH.G4(KJ, jCVar).iterator();
+            while (it2.hasNext()) {
+                jC jCVar2 = (jC) it2.next();
+                if (identityHashMap.put(jCVar2, Boolean.TRUE) == null) {
+                    uTVar.add(jCVar2);
+                }
+            }
+        }
+        return uTVar;
+    }
+
+    public uT(int i) {
+    }
+
+    public uT(List<jC> list) {
+        super(list);
+    }
+
+    public uT(jC... jCVarArr) {
+        super(Arrays.asList(jCVarArr));
+    }
+
+    public final jC N() {
+        return isEmpty() ? null : (jC) get(0);
+    }
+
+    public final List<String> SN() {
+        ArrayList uTVar = new uT(size());
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            jC jCVar = (jC) it.next();
+            if (jCVar.mG()) {
+                uTVar.add(jCVar.s0());
+            }
+        }
+        return uTVar;
+    }
+
+    public final Object clone() {
+        uT uTVar = new uT(size());
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            uTVar.add(((jC) it.next()).i3());
+        }
+        return uTVar;
+    }
+
+    public final String i() {
+        StringBuilder SN = e2.SN();
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            jC jCVar = (jC) it.next();
+            if (SN.length() != 0) {
+                SN.append(vXT.d("68"));
+            }
+            SN.append(jCVar.s0());
+        }
+        return e2.Gc(SN);
+    }
+
+    public final jC tF() {
+        return isEmpty() ? null : (jC) get(size() - 1);
+    }
+
+    public final String toString() {
+        StringBuilder SN = e2.SN();
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            jC jCVar = (jC) it.next();
+            if (SN.length() != 0) {
+                SN.append(vXT.d("42"));
+            }
+            SN.append(jCVar.g9());
+        }
+        return e2.Gc(SN);
+    }
+
+    public final String yq(String str) {
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            jC jCVar = (jC) it.next();
+            if (jCVar.dT(str)) {
+                return jCVar.tF(str);
+            }
+        }
+        return "";
+    }
+}
+vXT
+//
+// Decompiled by Jadx (from NP Manager)
+//
+package com.github.catvod.spider.merge;
+
+import java.io.ByteArrayOutputStream;
+
+public class vXT {
+    private static final String KEY = "HQqRxI";
+    private static final String hexString = "0123456789ABCDEF";
+
+    public static String d(String str) {
+        int i;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream(str.length() / 2);
+        for (i = 0; i < str.length(); i += 2) {
+            baos.write((hexString.indexOf(str.charAt(i)) << 4) | hexString.indexOf(str.charAt(i + 1)));
+        }
+        byte[] b = baos.toByteArray();
+        int len = b.length;
+        int keyLen = KEY.length();
+        for (i = 0; i < len; i++) {
+            b[i] = (byte) (b[i] ^ KEY.charAt(i % keyLen));
+        }
+        return new String(b);
+    }
+}

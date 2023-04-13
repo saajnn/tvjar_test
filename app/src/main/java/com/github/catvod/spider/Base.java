@@ -7,6 +7,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import android.content.Context;
+import android.text.TextUtils;
+import android.util.Base64;
 
 import java.util.HashMap;
 import java.util.List;
