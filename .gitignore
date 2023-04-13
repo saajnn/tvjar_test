@@ -5,6 +5,7 @@
 .gitattributes
 .gradle/
 *.class
+app/src/main/test/*
 app/.classpath
 app/.settings
 app/src/main/java/com/github/catvod/demo/MainActivity.java
